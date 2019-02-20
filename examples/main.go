@@ -41,10 +41,18 @@ func main() {
 		//httptransport.ServerErrorEncoder(encodeError),
 	}
 
-	r.Methods("POST").Path("/generateReport").Handler(httptransport.NewServer(
+	r.Methods("POST").Path("/").Handler(httptransport.NewServer(
 		//githubstats2.MakeGenerateReportEndpoint(svc),
-		//githubstats2.DecodeGenerateReportRequest,
-		//githubstats2.EncodeResponse,
+		options...,
+	))
+
+	r.Methods("POST").Path("/GoogleLogin").Handler(httptransport.NewServer(
+		//githubstats2.MakeGenerateReportEndpoint(svc),
+		options...,
+	))
+
+	r.Methods("POST").Path("/GoogleCallback").Handler(httptransport.NewServer(
+		//githubstats2.MakeGenerateReportEndpoint(svc),
 		options...,
 	))
 
