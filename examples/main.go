@@ -46,12 +46,22 @@ func main() {
 		options...,
 	))
 
-	r.Methods("POST").Path("/GoogleLogin").Handler(httptransport.NewServer(
+	r.Methods("POST").Path("/registerUser").Handler(httptransport.NewServer(
 		//githubstats2.MakeGenerateReportEndpoint(svc),
 		options...,
 	))
 
-	r.Methods("POST").Path("/GoogleCallback").Handler(httptransport.NewServer(
+	r.Methods("POST").Path("/user").Handler(httptransport.NewServer(
+		//githubstats2.MakeGenerateReportEndpoint(svc),
+		options...,
+	))
+
+	r.Methods("POST").Path("/authorize").Handler(httptransport.NewServer(
+		//githubstats2.MakeGenerateReportEndpoint(svc),
+		options...,
+	))
+
+	r.Methods("POST").Path("/accesstoken").Handler(httptransport.NewServer(
 		//githubstats2.MakeGenerateReportEndpoint(svc),
 		options...,
 	))

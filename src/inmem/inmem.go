@@ -2,21 +2,30 @@ package inmem
 
 import (
 	"sync"
+
+	"github.com/sh4nnongoh/goAuth/src/user"
 )
 
+// NewUserRepository returns a new instance of a in-memory user repository.
+func NewUserRepository() user.Repository {
+	return &userRepository{
+		users: make(map[user.UserID]*user.User),
+	}
+}
+
 type userRepository struct {
-	mtx sync.RWMutex
-	users map[user.ID]*user.User
+	mtx   sync.RWMutex
+	users map[user.UserID]*user.User
 }
 
 func (r *userRepository) Store(u *user.User) error {
 	r.mtx.Lock()
 	defer r.mtx.Unlock()
-	r.users[u.ID] = u
+	r.users[u.UserID] = u
 	return nil
 }
 
-func (r *userRepository) Find(id user.ID) (*user.User, error) {
+func (r *userRepository) Find(id user.UserID) (*user.User, error) {
 	r.mtx.RLock()
 	defer r.mtx.RUnlock()
 	if val, ok := r.users[id]; ok {
